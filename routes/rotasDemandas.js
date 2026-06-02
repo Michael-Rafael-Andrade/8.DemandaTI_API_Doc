@@ -62,7 +62,7 @@ router.post('/',
                 $ref: '#/definitions/NovaDemanda'
             }
         }
-        #swagger.response[201] = {
+        #swagger.response[201] = { schema: {
             $ref: '#/definitions/Demanda'
         }
     }
@@ -83,7 +83,13 @@ router.put('/:id',
             type: 'integer',
             description: 'ID da demanda'
         }
-        
+        #swagger.parameters['body'] = {
+            in: 'body',
+            required: true,
+            schema: {
+                $ref: '#/definitions/AtualizaDemanda'
+            }
+        }
         #swagger.response[200] = {
             schema: {
                 $ref: '#/definitions/Demanda'

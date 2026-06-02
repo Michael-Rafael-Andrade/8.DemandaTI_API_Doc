@@ -1,0 +1,276 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "DemandasTI API",
+    "version": "1.0.0",
+    "description": "API REST para gerenciamento de demandas de TI"
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "summary": "Retorna informações gerais da API",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/servicos": {
+      "get": {
+        "tags": [
+          "Index"
+        ],
+        "summary": "Lista os serviços disponíveis na API",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/demandas/": {
+      "get": {
+        "tags": [
+          "Demandas"
+        ],
+        "summary": "Lista todas as demandas",
+        "description": "",
+        "parameters": [
+          {
+            "name": "status",
+            "in": "query",
+            "type": "string",
+            "enum": [
+              "pendente",
+              "em_andamento",
+              "concluido"
+            ],
+            "description": "Filtra pelo status"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Demandas"
+        ],
+        "summary": "Cria uma nova demanda",
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NovaDemanda"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/demandas/{id}": {
+      "get": {
+        "tags": [
+          "Demandas"
+        ],
+        "summary": "Retorna uma demanda pelo ID",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID da demanda"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Demandas"
+        ],
+        "summary": "Atualiza uma demanda existente",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID da demanda"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AtualizaDemanda"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Demandas"
+        ],
+        "summary": "Remove uma demanda",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID da demanda"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Demanda": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "number",
+          "example": 1
+        },
+        "titulo": {
+          "type": "string",
+          "example": "Instalar impressora"
+        },
+        "texto": {
+          "type": "string",
+          "example": "Necessário instalar driver da impressora HP"
+        },
+        "urgencia": {
+          "type": "number",
+          "example": 3
+        },
+        "status": {
+          "type": "string",
+          "example": "pendente"
+        },
+        "criada_em": {
+          "type": "string",
+          "example": "2026-05-27T10:00:00.000Z"
+        },
+        "atualizada_em": {
+          "type": "string",
+          "example": "2026-05-27T10:00:00.000Z"
+        }
+      }
+    },
+    "NovaDemanda": {
+      "type": "object",
+      "properties": {
+        "titulo": {
+          "type": "string",
+          "example": "Instala impressora"
+        },
+        "texto": {
+          "type": "string",
+          "example": "Necessário instalar driver da impressora HP"
+        },
+        "urgencia": {
+          "type": "number",
+          "example": 3
+        }
+      },
+      "required": [
+        "titulo",
+        "texto",
+        "urgencia"
+      ]
+    },
+    "atualizarDemanda": {
+      "type": "object",
+      "properties": {
+        "titulo": {
+          "type": "string",
+          "example": "instalar impressora"
+        },
+        "texto": {
+          "type": "string",
+          "example": "Driver atualizado"
+        },
+        "urgencia": {
+          "type": "number",
+          "example": 2
+        },
+        "status": {
+          "type": "string",
+          "example": "em_andamento"
+        }
+      }
+    }
+  }
+}
