@@ -8,8 +8,12 @@ var swagger = require('swagger-ui-express');
 // importação do JSON gerado pelo swagger-autogen
 var swagger_saida = require('./config/swagger_output.json');
 
+// importa o passport já configurado com a estratégia JWT
+var { passport } = require('./config/passport');
+
 var rotasIndex = require('./routes/rotasIndex');
 var rotasDemandas = require('./routes/rotasDemandas');
+var rotasUsuarios = require('./routes/rotasUsuarios');
 
 var app = express();
 
@@ -19,10 +23,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Inicializa o Passport - deve ser feito antes das rotas protegidas.
+app.use(passport.initialize());
+
 // rota para a documentação Swagger, antes das demais rotas da API
 app.use('/api-docs', swagger.serve, swagger.setup(swagger_saida));
 
 app.use('/', rotasIndex);
+app.use('/api/usuarios', rotasUsuarios);
 app.use('/api/demandas/', rotasDemandas);
 
 module.exports = app;

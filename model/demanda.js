@@ -2,10 +2,9 @@ const { DataTypes, Model } = require('sequelize');
 const sequelize = require('./server.js');
 const Usuario = require('./usuario.js');
 
-
 class Demanda extends Model { } // classe herdando de 'Model'
 
-Demanda.init( // Construtor com a definição dos atributos
+Demanda.init( // construtor com a definição dos atributos
     {
         // substituindo o atributo 'chave'
         id: {
@@ -28,9 +27,9 @@ Demanda.init( // Construtor com a definição dos atributos
             validate: {
                 min: 1,
                 max: 5
-            }
+            },
         },
-        // Novo tipo ENUM, para limitar os valores possíveis do atributo 'status'
+        // novo tipo ENUM, para limitar os valores possíveis do atributo 'status'
         status: {
             type: DataTypes.ENUM('pendente', 'em_andamento', 'concluido'),
             allowNull: false,
@@ -42,13 +41,13 @@ Demanda.init( // Construtor com a definição dos atributos
         },
     },
     {
-        // Configurações adicionais do modelo
-        sequelize, // para estabelecer conexão com BD
+        // configurações adicionais do modelo
+        sequelize, // para estabelecer conexão com Banco de Dados
         freezeTableName: true, // nome da tabela igual ao nome da classe
         createdAt: 'criada_em', // nome do atributo 'createdAt'
         updatedAt: 'atualizada_em', // nome do atributo 'updatedAt'
     },
-);
+)
 // hasmany = tem muitos(as)
 
 Usuario.hasMany(Demanda, { foreignKey: 'usuario_id' });
@@ -57,12 +56,8 @@ Usuario.hasMany(Demanda, { foreignKey: 'usuario_id' });
 
 Demanda.belongsTo(Usuario, { foreignKey: 'usuario_id' });
 
-// force : true => apaga toda tabela e constroi uma nova com base no modelo
-
-// alter : true => altera a tabela ou sincroniza com a tabela
-
 // Sincroniza os modelos com o banco de dados, aplicando alterações de estrutura (alter : true )
-// sequelize.sync({ alter: true }).then(() => {
+// sequelize.sync({ force: true }).then(() => {
 //     console.log('Modelos sincronizados com o banco de dados.');
 // }).catch((error) => {
 //     console.log('Erro ao sincronizar modelos com o banco de dados: ', error);
