@@ -29,6 +29,38 @@ const doc = {
     // Schemas/Modelos de Dados utilizados nos serviços da API
     definitions: {
 
+        // dados para cadastro de novo usuário
+        NovoUsuario: {
+            $nome: 'João Silva',
+            $email: 'joao@email.com',
+            $senha: 'senha123',
+        },
+
+        // retorno do usuário criado (sem senha_hash)
+        UsuarioCriado: {
+            id: 1,
+            nome: 'João Silva',
+            email: 'joao@email.com',
+            perfil: 'usuaio',
+        },
+
+        // dados para login
+        LoginUsuario: {
+            $email: 'joao@email.com',
+            $senha: 'senha123',
+        },
+
+        // retorno do login: token JWT + dados básicos do usuário
+        LoginResposta: {
+            token: '',
+            usuario: {
+                id: 1,
+                nome: 'João Silva',
+                email: 'joao@email.com',
+                perfil: 'usuario',
+            },
+        },
+
         // retorno completo de uma demanda, usado nas respostas
         Demanda: {
             id: 1,
@@ -49,7 +81,7 @@ const doc = {
         },
 
         // dados opcionais para atualizar uma demanda (PUT)
-        atualizarDemanda: {
+        AtualizarDemanda: {
             titulo: 'instalar impressora',  // não tem o $ porque os campos podem ser opcionais
             texto: 'Driver atualizado',
             urgencia: 2,
