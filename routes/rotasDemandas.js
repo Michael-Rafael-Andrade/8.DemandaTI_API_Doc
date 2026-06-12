@@ -48,7 +48,7 @@ router.get('/:id',
             }
         }
     */
-    controllerDemandas.obter
+    ehAutenticado, controllerDemandas.obter
 );
 
 // Criar
