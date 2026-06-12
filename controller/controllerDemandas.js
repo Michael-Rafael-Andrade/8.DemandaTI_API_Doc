@@ -1,4 +1,4 @@
-const Demanda = require('../model/modelos.js');
+const { Demanda } = require('../model/modelos.js');
 
 // Lista todas as demandas, suporta filtro por status via query string
 exports.listar = async function (req, res) {
@@ -71,7 +71,7 @@ exports.criar = async function (req, res) {
         return res.status(400).json({ errors });
     // Se passar de todas as validações vamos tentar salvar no banco de dados
     try {
-        const nova_demanda = await Demanda.create({ titulo: demanda_enviada.titulo, texto: demanda_enviada.texto, urgencia: urg });
+        const nova_demanda = await Demanda.create({ titulo: demanda_enviada.titulo, texto: demanda_enviada.texto, urgencia: urg, usuario_id: req.user.id }); // inserir usuario_id: req.user.id para validação
         // código HTTP para criação de registro é 201 Created
         return res.status(201).json(nova_demanda);
     } catch (error) {

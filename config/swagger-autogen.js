@@ -5,7 +5,7 @@ const doc = {
     info: {
         title: 'DemandasTI API',
         version: '1.0.0',
-        description: 'API REST para gerenciamento de demandas de TI',
+        description: 'API REST para gerenciamento de demandas de TI com autenticação JWT',
     },
 
     // servidor onde a API está disponível
@@ -13,6 +13,18 @@ const doc = {
 
     // protocolo usado(http ou https)
     schemes: ['http'],
+
+    // Define o esquema de segurança BearerAuth (JWT via header Authorization)
+    // Para usar no Swagger UI: clique em "Authorize" e informe: Bearer <seu_token>
+    securityDefinitions: {
+        BearerAuth: {
+            type: 'apiKey',
+            in: 'header',
+            name: 'Authorization',
+            description: 'Informe o token JWT no formato: Bearer <token>',
+        },
+    },
+
 
     // Schemas/Modelos de Dados utilizados nos serviços da API
     definitions: {
