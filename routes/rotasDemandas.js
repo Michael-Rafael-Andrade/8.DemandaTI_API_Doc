@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var controllerDemandas = require('../controller/controllerDemandas.js');
+var { ehAutenticado } = require('../middlewares/controleUsuario.js');
 
 // Listar / filtrar
 router.get('/',
@@ -27,7 +28,7 @@ router.get('/',
             }
         }
     */
-    controllerDemandas.listar
+    ehAutenticado, controllerDemandas.listar
 );
 
 // Obter por id
