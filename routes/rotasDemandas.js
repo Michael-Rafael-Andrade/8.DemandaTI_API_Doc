@@ -69,7 +69,7 @@ router.post('/',
     }
     
     */
-    controllerDemandas.criar
+    ehAutenticado, controllerDemandas.criar
 );
 
 
@@ -99,7 +99,7 @@ router.put('/:id',
     
     */
 
-    controllerDemandas.atualizar
+    ehAutenticado, controllerDemandas.atualizar
 
 );
 
@@ -116,7 +116,7 @@ router.delete('/:id',
         }
     */
 
-    controllerDemandas.deletar
+    ehAutenticado, controllerDemandas.deletar
 );
 
 module.exports = router;
