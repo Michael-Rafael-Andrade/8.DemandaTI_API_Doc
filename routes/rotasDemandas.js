@@ -38,6 +38,7 @@ router.get('/:id',
     /*
         #swagger.tags       = ['Demandas']
         #swagger.summary    = 'Retorna uma demanda pelo ID'
+        #swagger.security = [{ "BearerAuth": [] }]
         #swagger.parameters['id'] = {
             in: 'path',
             required: true,
@@ -49,6 +50,7 @@ router.get('/:id',
                 $ref: '#/definitions/Demanda'
             }
         }
+        #swagger.response[401] = { description: 'Token ausente ou inválido' }
     */
     ehAutenticado, controllerDemandas.obter
 );
@@ -58,6 +60,7 @@ router.post('/',
     /*
         #swagger.tags       = ['Demandas']
         #swagger.summary    = 'Cria uma nova demanda'
+        #swagger.security = [{ "BearerAuth" : [] }]
         #swagger.parameters['body'] = {
             in: 'body',
             required: true,
@@ -69,7 +72,7 @@ router.post('/',
             $ref: '#/definitions/Demanda'
         }
     }
-    
+    #swagger.response[401] = { description: 'Token ausente ou inválido' }
     */
     ehAutenticado, controllerDemandas.criar
 );
@@ -80,6 +83,7 @@ router.put('/:id',
     /*
         #swagger.tags       = ['Demandas']
         #swagger.summary    = 'Atualiza uma demanda existente'
+        #swagger.security = [{ "BearerAuth": [] }]
         #swagger.parameters['id'] = {
             in: 'path',
             required: true,
@@ -98,7 +102,7 @@ router.put('/:id',
                 $ref: '#/definitions/Demanda'
             }
         }
-    
+        #swagger.response[401] = { description: 'Token ausente ou inválido' }
     */
 
     ehAutenticado, controllerDemandas.atualizar
@@ -110,14 +114,16 @@ router.delete('/:id',
     /*
         #swagger.tags       = ['Demandas']
         #swagger.summary    = 'Remove uma demanda'
+        #swagger.security = [{ "BearerAuth": [] }]
         #swagger.parameters['id'] = {
             in: 'path',
             required: true,
             type: 'integer',
             description: 'ID da demanda'
         }
+    
+    #swagger.response[401] = { description: 'Token ausente ou inválido' }
     */
-
     ehAutenticado, controllerDemandas.deletar
 );
 
