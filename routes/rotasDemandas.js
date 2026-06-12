@@ -8,6 +8,7 @@ router.get('/',
     /*
     #swagger.tags    = ['Demandas']
     #swagger.summary = 'Lista todas as demandas'
+    #swagger.security = [{ "BearerAuth": [] }]
     #swagger.parameters['status'] = {
         in: 'query',
         type: 'string',
@@ -27,6 +28,7 @@ router.get('/',
                 }
             }
         }
+        #swagger.response[401] = { description: 'Token ausente ou inválido' }
     */
     ehAutenticado, controllerDemandas.listar
 );
