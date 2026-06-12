@@ -36,6 +36,7 @@ const doc = {
             texto: 'Necessário instalar driver da impressora HP',
             urgencia: 3,
             status: 'pendente',
+            usuario_id: 1,
             criada_em: '2026-05-27T10:00:00.000Z',
             atualizada_em: '2026-05-27T10:00:00.000Z',
         },
